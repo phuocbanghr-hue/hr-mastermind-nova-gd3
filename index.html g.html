@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Tech Tour | Đưa Đồng Hương Về Nhà</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. THIẾT LẬP CƠ BẢN
+           ========================================================================== */
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #ffb300;
+            --accent-hover: #ffa000;
+            --danger-color: #ff5252; /* Màu báo hiệu khan hiếm */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f4f7f6;
+            --bg-white: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background-color: var(--bg-light); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 30px; border-radius: 50px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; transition: all var(--transition-speed) ease; cursor: pointer; border: none;
+        }
+        .btn-primary { background-color: var(--accent-color); color: var(--primary-color); box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4); }
+        .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 179, 0, 0.6); }
+        .btn-outline { background-color: transparent; color: var(--text-light); border: 2px solid var(--accent-color); }
+        .btn-outline:hover { background-color: var(--accent-color); color: var(--primary-color); }
+
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-color); margin-bottom: 50px; position: relative; }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(26, 35, 126, 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all var(--transition-speed);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--text-light); font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent-color); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links li a { color: var(--text-light); font-weight: 600; transition: color var(--transition-speed); }
+        .nav-links li a:hover { color: var(--accent-color); }
+
+        /* ==========================================================================
+           3. HERO SECTION & HR SCARCITY TACTIC
+           ========================================================================== */
+        .hero {
+            height: 100vh; min-height: 800px;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(57, 73, 171, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex; align-items: center; text-align: center; color: var(--text-light); padding-top: 80px;
+        }
+        .hero-content { max-width: 900px; margin: 0 auto; animation: fadeInDown 1s ease; }
+        .tagline { display: inline-block; background: rgba(255, 179, 0, 0.2); color: var(--accent-color); padding: 8px 20px; border-radius: 50px; font-weight: 600; margin-bottom: 20px; border: 1px solid var(--accent-color); }
+        .hero h1 { font-size: 4rem; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
+        .hero p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
+
+        /* Tiện ích Khan hiếm (Scarcity Bar) - HR Tactic */
+        .scarcity-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 15px; margin: 0 auto 40px; max-width: 500px; backdrop-filter: blur(5px); }
+        .scarcity-text { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
+        .scarcity-text .urgent { color: var(--danger-color); animation: pulse 1.5s infinite; }
+        .progress-bar { width: 100%; height: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color), var(--danger-color)); width: 85%; border-radius: 10px; transition: width 1s ease; }
+
+        .countdown { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .time-box { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; min-width: 100px; }
+        .time-box span { display: block; font-size: 2.5rem; font-weight: 800; font-family: 'Montserrat', sans-serif; color: var(--accent-color); }
+        .time-box p { margin: 0; font-size: 0.9rem; text-transform: uppercase; opacity: 0.8; }
+
+        /* ==========================================================================
+           4. LỘ TRÌNH (TIMELINE)
+           ========================================================================== */
+        .itinerary { padding: 100px 0; background-color: var(--bg-light); }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -3px; border-radius: 3px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; opacity: 0; transform: translateY(50px); transition: all 0.6s ease; }
+        .timeline-item.show { opacity: 1; transform: translateY(0); }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: '\f207'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; width: 35px; height: 35px; right: -17px; background-color: var(--accent-color); color: var(--primary-color); top: 15px; border-radius: 50%; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; box-shadow: 0 0 0 4px var(--bg-light); }
+        .timeline-item.right::after { left: -18px; }
+        .timeline-content { padding: 30px; background-color: var(--bg-white); position: relative; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid var(--accent-color); }
+        .time-badge { display: inline-block; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; }
+
+        /* ==========================================================================
+           5. ĐỐI TÁC (COMPANIES)
+           ========================================================================== */
+        .companies { padding: 100px 0; background-color: var(--bg-white); }
+        .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .company-card { background: var(--bg-light); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; border: 1px solid #eaeaea; }
+        .company-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-color: var(--accent-color); }
+        .company-logo { width: 90px; height: 90px; background: var(--bg-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: var(--primary-color); margin: 0 auto 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .tech-stack { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+        .tech-stack span { background: rgba(26, 35, 126, 0.1); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: default; transition: 0.3s; }
+        .tech-stack span:hover { background: var(--primary-color); color: white; }
+
+        /* ==========================================================================
+           6. FORMS & HR FEATURES (SPEED INTERVIEW & TALENT POOL)
+           ========================================================================== */
+        .registration { padding: 100px 0; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--text-light); }
+        .forms-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .form-card { background: var(--bg-white); color: var(--text-dark); padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .form-card h3 { color: var(--primary-color); margin-bottom: 5px; font-size: 1.6rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 15px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(26,35,126,0.1); }
+        .talent-pool-btn { text-align: center; margin-top: 30px; }
+        
+        /* ==========================================================================
+           7. FAQ ACCORDION (TÍNH NĂNG NHỎ HAY HAY)
+           ========================================================================== */
+        .faq-section { padding: 80px 0; background: var(--bg-white); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--bg-light); margin-bottom: 15px; border-radius: 10px; overflow: hidden; border: 1px solid #eaeaea; }
+        .faq-question { padding: 20px; font-weight: 700; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: #555; }
+        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--accent-color); }
+        .faq-question i { transition: transform 0.3s; }
+
+        /* Footer & Animations */
+        footer { background-color: #0d1240; color: var(--text-light); padding: 60px 0 20px; text-align: center; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .forms-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 14px !important; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-bus"></i> TechTour.</div>
+            <ul class="nav-links">
+                <li><a href="#itinerary">Lộ Trình</a></li>
+                <li><a href="#companies">Đối Tác</a></li>
+                <li><a href="#faq">Hỏi Đáp</a></li>
+                <li><a href="#register" class="btn btn-primary" style="padding: 8px 20px;">Giữ Chỗ Ngay</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="tagline"><i class="fas fa-fire"></i> Giai đoạn 3: Phỏng vấn trực tiếp</span>
+            <h1>Đưa Đồng Hương Về Nhà</h1>
+            <p>Trải nghiệm chuyến xe công nghệ độc quyền. Tham quan văn phòng, giao lưu cùng Lead và chốt Offer liền tay tại các "Ông lớn" IT Đà Nẵng.</p>
+            
+            <div class="scarcity-box">
+                <div class="scarcity-text">
+                    <span>Trạng thái đăng ký xe</span>
+                    <span class="urgent"><i class="fas fa-exclamation-circle"></i> Chỉ còn 7/50 ghế!</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><p>Ngày</p></div>
+                <div class="time-box"><span id="hours">00</span><p>Giờ</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>Phút</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>Giây</p></div>
+            </div>
+
+            <a href="#register" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Lên Xe Ngay</a>
+            <a href="#itinerary" class="btn btn-outline" style="margin-left: 15px;"><i class="fas fa-map-marked-alt"></i> Xem Lộ Trình</a>
+        </div>
+    </section>
+
+    <section id="itinerary" class="itinerary">
+        <div class="container">
+            <h2 class="section-title">Lộ Trình Chuyến Xe Đặc Biệt</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item left reveal">
+                    <div class="timeline-content">
+                        <span class="time-badge"><i class="far fa-clock"></i> 08:00 AM</span>
+                        <h3>📍 Khởi hành</h3>
+                        <p>Check-in tại Cầu Rồng. Nhận Welcome Kit "Đồng Hương" và thưởng thức cafe sáng networking cùng các ứng viên khác.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right reveal">
+                    <div class="timeline-content">
+                        <span class="time-badge"><i class="far fa-clock"></i> 09:00 AM</span>
+                        <h3>Trạm 1: FPT Software</h3>
+                        <p>Tham quan Campus F-Complex đẳng cấp. Tìm hiểu các siêu dự án Automotive và hệ sinh thái toàn cầu.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left reveal">
+                    <div class="timeline-content">
+                        <span class="time-badge"><i class="far fa-clock"></i> 11:00 AM</span>
+                        <h3>Trạm 2: Paradox AI</h3>
+                        <p>Khám phá văn phòng chuẩn Mỹ. Gặp gỡ đội ngũ đứng sau siêu AI trợ lý nhân sự Olivia.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right reveal">
+                    <div class="timeline-content">
+                        <span class="time-badge"><i class="far fa-clock"></i> 14:00 PM</span>
+                        <h3>Trạm 3: KMS Technology</h3>
+                        <p>Thưởng thức Teabreak chuẩn vị miền Trung. Trải nghiệm văn hóa "Human-centric" và quy trình phát triển Product.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left reveal">
+                    <div class="timeline-content">
+                        <span class="time-badge" style="background: #a50034;"><i class="far fa-clock"></i> 16:00 PM</span>
+                        <h3>Trạm 4: LG Electronics (VS DC)</h3>
+                        <p>Trạm cuối bùng nổ tại Trung tâm R&D của LG. Trực tiếp trải nghiệm công nghệ phần mềm ô tô (Infotainment, Telematics) và <strong>Speed Interview</strong> cùng Line Manager.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="companies" class="companies">
+        <div class="container">
+            <h2 class="section-title">Các "Bến Đỗ" Trong Mơ</h2>
+            <div class="company-grid">
+                
+                <div class="company-card reveal">
+                    <div class="company-logo">F</div>
+                    <h3>FPT Software</h3>
+                    <div class="tech-stack"><span>Automotive</span><span>C++</span><span>AI</span><span>Cloud</span></div>
+                </div>
+
+                <div class="company-card reveal">
+                    <div class="company-logo">K</div>
+                    <h3>KMS Technology</h3>
+                    <div class="tech-stack"><span>ReactJS</span><span>Java</span><span>NodeJS</span></div>
+                </div>
+
+                <div class="company-card reveal">
+                    <div class="company-logo">P</div>
+                    <h3>Paradox</h3>
+                    <div class="tech-stack"><span>Python</span><span>AWS</span><span>AI/NLP</span></div>
+                </div>
+
+                <div class="company-card reveal" style="border-bottom: 4px solid #a50034;">
+                    <div class="company-logo" style="color: #a50034;">LG</div>
+                    <h3>LG Electronics</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Vehicle Component Solutions</p>
+                    <div class="tech-stack"><span>C/C++</span><span>Android</span><span>Embedded</span></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="registration">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Chọn Cách Bạn Về Nhà</h2>
+            <div class="forms-container">
+                
+                <div class="form-card reveal">
+                    <h3>🚌 Đăng Ký Boarding Pass</h3>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.9rem;">Điền form để giữ ghế và nhận đặc quyền Speed Interview.</p>
+                    <form onsubmit="alert('Boarding Pass đã được gửi vào email của bạn!'); return false;">
+                        <div class="form-group">
+                            <label>Họ và Tên</label>
+                            <input type="text" required placeholder="Nhập họ tên của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label>Tech Stack chính của bạn</label>
+                            <input type="text" required placeholder="VD: Java, React, C++...">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-bolt" style="color: var(--accent-color);"></i> Muốn ưu tiên "Speed Interview" với:</label>
+                            <select required>
+                                <option value="">-- Chọn công ty mục tiêu --</option>
+                                <option>FPT Software</option>
+                                <option>KMS Technology</option>
+                                <option>Paradox</option>
+                                <option>LG Electronics</option>
+                                <option>Tôi chỉ muốn tham quan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Link CV / LinkedIn</label>
+                            <input type="url" placeholder="https://..." required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem;">Submit & Lấy Vé</button>
+                    </form>
+                </div>
+
+                <div class="form-card reveal" style="position: relative; border: 3px dashed var(--accent-color);">
+                    <div style="position: absolute; top: -15px; right: -15px; background: #4caf50; color: white; padding: 10px; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-weight: bold; transform: rotate(15deg);">$$$</div>
+                    <h3>🤝 Săn Tiền Thưởng (Referral)</h3>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.9rem;">Bạn làm ở công ty đối tác? Giới thiệu bạn bè về Đà Nẵng để nhận thưởng nóng.</p>
+                    <form onsubmit="alert('Đã ghi nhận dữ liệu Referral!'); return false;">
+                        <div class="form-group">
+                            <label>Email công ty của bạn (Người giới thiệu)</label>
+                            <input type="email" required placeholder="VD: nam.nguyen@lg.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên "Đồng hương" được giới thiệu</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>SĐT hoặc Email người được giới thiệu</label>
+                            <input type="text" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; background: var(--primary-color); color: white;">Gửi Ứng Viên</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="talent-pool-btn reveal">
+                <p style="margin-bottom: 15px; font-weight: 600;">Chưa thể đi xe hôm nay nhưng muốn tìm hiểu cơ hội?</p>
+                <button class="btn btn-outline" onclick="alert('Tính năng Upload CV đang mở pop-up...')"><i class="fas fa-cloud-upload-alt"></i> Thả CV vào Talent Pool chung</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Hỏi Đáp Nhanh</h2>
+            <div class="faq-container">
+                <div class="faq-item reveal">
+                    <div class="faq-question">1. Chuyến xe có thu phí không? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Hoàn toàn miễn phí 100%. Central Tech Tour là dự án phi lợi nhuận do cộng đồng HR Mastermind phối hợp cùng các công ty công nghệ tài trợ để đón nhân tài về quê hương.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">2. Speed Interview hoạt động như thế nào? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Khi chọn công ty mục tiêu ở form đăng ký, CV của bạn sẽ được chuyển thẳng cho Hiring Manager. Tại điểm dừng của công ty đó, bạn sẽ có 15-20 phút phỏng vấn nhanh 1-1 ở phòng riêng biệt. Có thể chốt deal ngay trong ngày!</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">3. Tôi không phải gốc miền Trung có tham gia được không? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Rất hoan nghênh! Chuyến xe chào đón tất cả nhân tài IT có định hướng sống và làm việc lâu dài tại thành phố biển Đà Nẵng.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 style="letter-spacing: 2px;">CENTRAL TECH TOUR</h2>
+            <p>Khởi nguồn công việc - Bắt sóng thành công</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 30px;">
+                © 2026 Bản quyền thuộc về Ban Tổ Chức HR MASTERMIND.<br>Born to Shine, Bound to Rise.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Countdown Timer
+        const countDownDate = new Date("Dec 31, 2026 08:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // 2. Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("show");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // 3. FAQ Accordion Logic
+        const faqs = document.querySelectorAll('.faq-item');
+        faqs.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                // Đóng các item khác (nếu muốn mở 1 cái 1 lúc)
+                faqs.forEach(faq => { if(faq !== item) faq.classList.remove('active'); });
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
